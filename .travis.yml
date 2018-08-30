@@ -1,18 +1,23 @@
 sudo: false
-language: cpp
-group: beta
+
+os: linux
+dist: trusty
+
+language: python
+
+python: 3.6
 
 matrix:
   include:
-    - os: linux
-      dist: trusty
-    - os: osx
+    - env: CC=gcc
+    - env: CC=clang
 
 install:
-  - export PATH="`pwd`/build/${PATH}"
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew install python3 ninja; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://github.com/ninja-build/ninja/releases/download/v1.7.2/ninja-linux.zip && unzip -q ninja-linux.zip -d build; fi
-  - pip3 install meson
+  - export NINJA_LATEST=$(curl -s https://api.github.com/repos/ninja-build/ninja/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep ninja-linux.zip)
+  - wget "$NINJA_LATEST"
+  - unzip -q ninja-linux.zip -d build
+  - export PATH="$PWD/build:$PATH"
+  - pip install meson
 
 script:
   - cd src && bash -vex meson.sh
