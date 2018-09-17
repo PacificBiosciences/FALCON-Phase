@@ -74,7 +74,9 @@ if compiler.get_id() == 'gcc'
   endforeach
 endif
 
-compiler_flags = ['-march=native', '-D_GNU_SOURCE']
+compiler_flags = [
+    #'-march=native', # This can lead to "Illegal instruction".
+    '-D_GNU_SOURCE']
 extra_flags = []
 
 ################
