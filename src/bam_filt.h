@@ -1,12 +1,9 @@
-
-#ifndef BAM_FILT_H
-#define BAM_FILT_H
-
+#pragma once
 
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <unistd.h>
+#include <unistd.h> // access/F_OK
 #include <math.h>
 #include <inttypes.h>
 #include <getopt.h>
@@ -39,6 +36,3 @@ int filter_bam(char ** argv, int argc);
 int parse_length_exclude(bam_hdr_t * header);
 
 int mod_dup_header( bam_hdr_t * dup);
-
-
-#endif /* BAM_FILT_H */

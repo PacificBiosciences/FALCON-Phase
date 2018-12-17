@@ -187,8 +187,8 @@ int parse_bamfilt_command_line(char ** argv, int argc)
 			bamfilt_global_opts.exclude_str = optarg;
 			if( access( bamfilt_global_opts.exclude_str, F_OK ) != -1 ) {
 				FILE * exclude_fn = fopen(bamfilt_global_opts.exclude_str, "r");
-				bamfilt_global_opts.exclude_str = bamfilt_global_opts.exclude_str = inputString(exclude_fn, 1000);
-				close(exclude_fn);
+				bamfilt_global_opts.exclude_str = inputString(exclude_fn, 1000);
+				fclose(exclude_fn);
 				bamfilt_global_opts.bin_filter |= EXCLUDE;
 			}
 			break;
@@ -346,9 +346,6 @@ int filter_bam(char ** argv, int argc){
 	int r2;
 	long int c = -1;
 
-	char * rn1;
-	char * rn2;
-
 	while (1) {
 
 		c+=1;
@@ -385,12 +382,12 @@ int filter_bam(char ** argv, int argc){
 
 			okay = sam_write1(output, header, rp.read1);
 			if(okay < -1) {
-				fprintf(stderr, "[FATAL] issue writing bam in %s near line %s \n", __FILE__, __LINE__);
+				fprintf(stderr, "[FATAL] issue writing bam in %s near line %i \n", __FILE__, __LINE__);
 				exit(1);
 			}
 			okay = sam_write1(output, header, rp.read2);
 			if(okay < -1) {
-				fprintf(stderr, "[FATAL] issue writing bam in %s near line %s \n", __FILE__, __LINE__);
+				fprintf(stderr, "[FATAL] issue writing bam in %s near line %i \n", __FILE__, __LINE__);
 				exit(1);
 			}
 		}
