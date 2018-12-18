@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-
+# vim: ts=8 sw=8 noet:
 ####################################################################################################
 #
 #		Sarah B. Kingan
@@ -37,9 +37,9 @@ my %fai_hash;
 my $index = 0;
 my @line_array;
 while (my $line = <FAI>) {
-        chomp$line;
-        @line_array = split("\t", $line);
-        $fai_hash{$line_array[0]} = $index;
+	chomp$line;
+	@line_array = split("\t", $line);
+	$fai_hash{$line_array[0]} = $index;
 	$index++;
 }
 $fai_hash{$line_array[0]} = $index;
@@ -73,8 +73,8 @@ my %AB_hash;
 open (AB, $AB_pairs_file);
 while (my $line = <AB>) {
 	if ($line =~ /[0-9]F/) { # ignore header lines
-	        chomp$line;
-       		 @line_array = split("\t", $line);
+		chomp$line;
+		@line_array = split("\t", $line);
 		my $A_name = $line_array[0];
 		my $B_name = $line_array[1];
 		my $A_index = getIndex($A_name);
@@ -82,9 +82,9 @@ while (my $line = <AB>) {
 		my $primary = getPrimary($A_name);
 	#	print join(",", ($A_name, $B_name, $A_index, $B_index)), "\n";
 		if (exists $AB_hash{$primary} ) {
-		        $AB_hash{$primary} .= ",".$A_index.":".$B_index;
+			$AB_hash{$primary} .= ",".$A_index.":".$B_index;
 	# name	        $AB_hash{$primary} .= ",".$A_name.":".$B_name;
-	        }
+		}
 		else {
 			$AB_hash{$primary} .= $A_index.":".$B_index;
 	# name		$AB_hash{$primary} .= $A_name.":".$B_name;
@@ -107,11 +107,11 @@ foreach my $contig ( @primary_list ) {
 		print "NA", "\t";
 	}
 	if ( exists $AB_hash{$contig} )  {
-                print $AB_hash{$contig}, "\n";
-        }
-        else {
-                print "NA", "\n";
-        }
+		print $AB_hash{$contig}, "\n";
+	}
+	else {
+		print "NA", "\n";
+	}
 }
 
 
@@ -129,12 +129,12 @@ sub getPrimary {
 
 ## convert contig name to index
 sub getIndex {
-        my ($name) = @_;
+	my ($name) = @_;
 	my $index = 'error';
-        if ( exists $fai_hash{$name} ) {
-                $index = $fai_hash{$name};
-        }
-        return $index;
+	if ( exists $fai_hash{$name} ) {
+		$index = $fai_hash{$name};
+	}
+	return $index;
 }
 
 sub uniq {
