@@ -42,7 +42,7 @@ while (my $line = <FAI>) {
 	$fai_hash{$line_array[0]} = $index;
 	$index++;
 }
-$fai_hash{$line_array[0]} = $index;
+#$fai_hash{$line_array[0]} = $index;
 
 
 ## hash with list of contigs for each primary ##
