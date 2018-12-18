@@ -1,3 +1,4 @@
+// vim: ts=4 sw=4 noet:
 /*
    Author: Zev Kronenberg
    Contact :zev@phasegenomics.com
@@ -464,7 +465,7 @@ int stochastic_phasing(struct line_data * ld,
                        struct matrix * lc, int n,
                        FILE * results)
 {
-
+	const uint32_t nseq = si->nseq;
 	struct line_data * tmpld = ld;
 
 	while(tmpld != NULL) {
@@ -495,6 +496,11 @@ int stochastic_phasing(struct line_data * ld,
 		}
 
 		for(j = 0; j < tmpld->n_overlap; j++) {
+			if (nseq <= tmpld->overlaps[j].first || nseq <= tmpld->overlaps[j].second) {
+				fprintf(stderr, "ERROR: nseq=%u <= overlaps[j].first=%u or overlaps[j].second=%u at j=%i -- aborting.",
+						nseq, tmpld->overlaps[j].first, tmpld->overlaps[j].second, j);
+				abort();
+			}
 			const char * s1 = faidx_iseq(si->fai, tmpld->overlaps[j].first);
 			const char * s2 = faidx_iseq(si->fai, tmpld->overlaps[j].second);
 
