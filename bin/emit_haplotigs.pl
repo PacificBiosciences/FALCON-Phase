@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl -w
 
 ####################################################################################################
 #
@@ -36,7 +36,6 @@ if (!-s $phase_file) {
 	print "ERROR: Phasing results file, ", $phase_file, ", is empty\n";
 	exit;
 }
-
 
 my $BC_bed_file = shift(@ARGV) or die $usage;
 #000000F 0       10327801

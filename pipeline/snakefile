@@ -99,7 +99,7 @@ rule bam_filt   :
      input      : FF=config['falcon_phase'], BAM="hic_mapping/{sample}.unfiltered.bam"
      output     : "hic_mapping/{sample}.filtered.bam"
      shell      : """
-	{input.FF} bamfilt -f 20 -m 10 -i {input.BAM} -o {output}
+	{input.FF} bamfilt -f 20 -m 10 -i {input.BAM} -o {output} 2> hic_mapping/bamfilt.log
      """
 
 rule aln      :
