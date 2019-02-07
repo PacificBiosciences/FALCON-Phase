@@ -32,6 +32,11 @@ my $phase_file = shift(@ARGV) or die $usage;
 #000000F 000000F_003:0-35964 000000F:21633239-21669154 -nan 0.0375 0.0375 2 7
 #000000F 000000F_002:0-43639 000000F:35315359-35358662 -nan 0.1186 0.0172 1 8
 #000001F 000001F_003:0-92432 000001F:5464634-5557226 -nan 0.0725 0.0613 5 9
+if (!-s $phase_file) {
+	print "ERROR: Phasing results file, ", $phase_file, ", is empty\n";
+	exit;
+}
+
 
 my $BC_bed_file = shift(@ARGV) or die $usage;
 #000000F 0       10327801

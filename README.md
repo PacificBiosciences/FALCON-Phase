@@ -36,9 +36,9 @@ The version numbers of the dependencies are listed below, but new/older versions
 
 Cloning the repository downloads the pipeline, the source code, and HTSLIB. 
 
-`git clone --recursive https://github.com/phasegenomics/FALCON-Phase.git ; cd FALCON-Phase/src ; make`
+`git clone --recursive https://github.com/PacificBiosciences/pb-falcon-phase.git ; cd pb-falcon-phase/src ; make`
 
-After running this command you should see the executable binary `FALCON-Phase/bin/falcon-phase`.
+After running this command you should see the executable binary `pb-falcon-phase/bin/falcon-phase`.
 
 ## Running the test dataset :horse_racing:
 
